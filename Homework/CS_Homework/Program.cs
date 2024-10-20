@@ -21,6 +21,9 @@ static string ConvertToDuoDecimal(int number)
     if (number == 0)
         return "0";
 
+    bool isNegative = number < 0;
+    number = Math.Abs(number);
+
     int remainder = number % 12;
     string result;
 
@@ -41,14 +44,19 @@ static int CountACharOccurences(string input)
 {
     int count = 0;
     foreach (char c in input)
+    {
         if (c == 'A')
+        {
             count++;
+        }
+    }
     return count;
 }
 
-static void SwapVariableValues(int a, int b)
+static void SwapVariableValues(ref int a, ref int b)
 {
     int tempInt = b;
     b = a;
     a = tempInt;
 }
+

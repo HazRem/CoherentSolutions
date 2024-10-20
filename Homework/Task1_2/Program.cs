@@ -11,5 +11,10 @@ for (int i = 0; i < 9; i++)
 
 checkDigit = 11 - (sum % 11);
 
+if (checkDigit == 11)
+{
+    checkDigit = 0;
+}
+
 string isbn10 = isbn9 + (checkDigit == 10 ? "X" : checkDigit.ToString());
 Console.WriteLine("The complete 10-digit ISBN is: " + isbn10);
