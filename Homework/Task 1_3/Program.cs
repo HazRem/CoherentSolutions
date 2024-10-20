@@ -39,9 +39,10 @@ for (int i = 0; i < n; i++)
     }
 }
 
+Array.Resize(ref uniqueArray, uniqueCount);
 Console.WriteLine("Array with unique values:");
-for (int i = 0; i < uniqueCount; i++)
+foreach (int value in uniqueArray)
 {
-    Console.Write(uniqueArray[i] + " ");
+    Console.Write(value + " ");
 }
 Console.WriteLine();
