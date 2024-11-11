@@ -1,9 +1,4 @@
-﻿public interface IQueue<T> where T : struct
-{
-    void Enqueue(T item);
-    T Dequeue();
-    bool IsEmpty();
-}
+﻿using Task3_1;
 
 public class Queue<T> : IQueue<T> where T : struct
 {
@@ -41,33 +36,5 @@ public class Queue<T> : IQueue<T> where T : struct
     public override string ToString()
     {
         return string.Join(", ", list);
-    }
-}
-
-public static class QueueExtensions
-{
-    public static IQueue<T> Tail<T>(this IQueue<T> queue) where T : struct
-    {
-        Queue<T> tailQueue = new Queue<T>();
-        Queue<T> tempQueue = new Queue<T>();
-
-        if (!queue.IsEmpty())
-        {
-            queue.Dequeue();
-        }
-
-        while (!queue.IsEmpty())
-        {
-            T item = queue.Dequeue();
-            tailQueue.Enqueue(item);
-            tempQueue.Enqueue(item);
-        }
-
-        while (!tempQueue.IsEmpty())
-        {
-            queue.Enqueue(tempQueue.Dequeue());
-        }
-
-        return tailQueue;
     }
 }
