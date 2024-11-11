@@ -6,26 +6,6 @@ using System.Threading.Tasks;
 
 namespace Task2_3
 {
-    public abstract class TrainingContent
-    {
-        public string Description { get; set; }
-
-        public TrainingContent(string description)
-        {
-            Description = description;
-        }
-    }
-
-    public class Lecture : TrainingContent
-    {
-        public string Topic { get; set; }
-
-        public Lecture(string description, string topic) : base(description)
-        {
-            Topic = topic;
-        }
-    }
-
     public class PracticalLesson : TrainingContent
     {
         public string TaskCondition { get; set; }
@@ -35,6 +15,11 @@ namespace Task2_3
         {
             TaskCondition = taskCondition;
             SolutionLink = solutionLink;
+        }
+
+        public override object Clone()
+        {
+            return new PracticalLesson(Description, TaskCondition, SolutionLink);
         }
     }
 }

@@ -42,6 +42,7 @@ public class Point
 
     public double DistanceTo(Point other)
     {
+        if (other == null) return -1;
         double dx = X - other.X;
         double dy = Y - other.Y;
         double dz = Z - other.Z;

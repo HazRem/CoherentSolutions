@@ -8,36 +8,42 @@ namespace Task2_3
 {
     public class Training : ICloneable
     {
-        private List<TrainingContent> contents = new List<TrainingContent>();
+        private TrainingContent[] contents;
+    
+        public Training(int capacity = 10)
+        {
+            contents = new TrainingContent[capacity];
+        }
 
         public void Add(TrainingContent content)
         {
-            contents.Add(content);
-        }
+            int index = Array.IndexOf(contents, null);
 
+            if (index == -1)
+            {
+                index = contents.Length;
+                Array.Resize(ref contents, contents.Length * 2);
+            }
+
+            contents[index] = content;
+        }
         public bool IsPractical()
         {
             foreach (var content in contents)
             {
+                if (content is null) break;
                 if (content is not PracticalLesson)
                     return false;
             }
-            return contents.Count > 0;
+            return Array.IndexOf(contents, null) > 0;
         }
 
         public object Clone()
         {
             Training clonedTraining = new Training();
-            foreach (var content in contents)
+            foreach (TrainingContent content in contents)
             {
-                if (content is Lecture lecture)
-                {
-                    clonedTraining.Add(new Lecture(lecture.Description, lecture.Topic));
-                }
-                else if (content is PracticalLesson practical)
-                {
-                    clonedTraining.Add(new PracticalLesson(practical.Description, practical.TaskCondition, practical.SolutionLink));
-                }
+                clonedTraining.Add((TrainingContent)content.Clone());
             }
             return clonedTraining;
         }
